@@ -39,7 +39,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
 
         let content = UNMutableNotificationContent()
         content.title = "💬 SexMind"
-        content.body = SexMindQuotes.random()
+        content.body = QuoteManager.shared.randomQuote()
         content.sound = UNNotificationSound(named: UNNotificationSoundName("Positive_Reminder_FadeIn_Fixed.wav"))
 
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)

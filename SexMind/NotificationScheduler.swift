@@ -8,7 +8,7 @@ struct NotificationScheduler {
         // Prepare notification content
         let content = UNMutableNotificationContent()
         content.title = "💬 SexMind"
-        content.body = SexMindQuotes.random()
+        content.body = QuoteManager.shared.randomQuote()
         content.sound = UNNotificationSound(named: UNNotificationSoundName("Positive_Reminder_FadeIn_Fixed.wav"))
 
         // Extract hour and minute from selected time

@@ -9,6 +9,7 @@ struct ContentView: View {
     @State private var spermScene = SpermScene(size: UIScreen.main.bounds.size)
     @State private var selectedTime = Date()
     @State private var notificationSet: Bool? = false
+    @State private var showSweatOverlay = false
 
     @AppStorage("favoriteQuotes") private var favoriteQuotesData: Data = Data()
     @State private var favoriteQuotes: [String] = []
@@ -31,7 +32,9 @@ struct ContentView: View {
                 .allowsHitTesting(false)
                 .zIndex(1)
 
-            // Fixed title at top
+         
+
+            // Fixed header
             VStack {
                 Text("💖 SexMind Daily 💖")
                     .lineLimit(1)
@@ -46,7 +49,7 @@ struct ContentView: View {
             .frame(maxHeight: .infinity, alignment: .top)
             .zIndex(2)
 
-            // Main interactive content
+            // Main content
             VStack(spacing: 30) {
                 Spacer().frame(height: 100)
 
@@ -84,6 +87,8 @@ struct ContentView: View {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             currentQuote = QuoteManager.shared.randomQuote()
                         }
+
+                      
 
                         let buttonFrame = geo.frame(in: .global)
                         let buttonCenterGlobal = CGPoint(x: buttonFrame.midX, y: buttonFrame.midY)
@@ -136,7 +141,7 @@ struct ContentView: View {
                 }
                 .frame(height: 50)
 
-                // Notification logic
+                // Notifications
                 if notificationSet == true {
                     VStack(spacing: 6) {
                         Text("✅ Daily notification set.")
@@ -160,7 +165,6 @@ struct ContentView: View {
                         }
                     }
                     .padding(.top)
-
                 } else if notificationSet == false {
                     VStack(spacing: 16) {
                         Text("🔔 Want a daily quote?")
@@ -196,7 +200,6 @@ struct ContentView: View {
                         }
                     }
                     .padding(.top)
-
                 } else {
                     VStack(spacing: 10) {
                         Text("🔕 No notification active")

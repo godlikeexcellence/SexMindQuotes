@@ -11,8 +11,9 @@ class QuoteManager {
     private func loadQuotes() {
         if let url = Bundle.main.url(forResource: "quotes", withExtension: "txt") {
             do {
-                let content = try String(contentsOf: url)
-                quotes = content.components(separatedBy: .newlines).filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+                let content = try String(contentsOf: url, encoding: .utf8)
+                quotes = content.components(separatedBy: CharacterSet.newlines)
+                    .filter { !$0.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty }
             } catch {
                 print("⚠️ Failed to load quotes.txt: \(error.localizedDescription)")
             }
@@ -25,3 +26,4 @@ class QuoteManager {
         quotes.randomElement() ?? "You are enough."
     }
 }
+
